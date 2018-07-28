@@ -6,8 +6,7 @@ Open a video file and read frame 100:
 ```python
 from videoreader import VideoReader  
 vr = VideoReader(video_file_name)
-print(f"video {video_file_name} has {len(vr)} frames")
-print(vr)
+print(vr)  # print video_file_name, number of frames, and frame size
 frame = vr[100]
 vr.close()
 ```
