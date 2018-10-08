@@ -32,7 +32,7 @@ ret, frame = vr.read()  # read next frame
 ## Installation
 In a terminal window run:
 ```shell
-pip install http://github.com/postpop/videoreader
+pip install git+http://github.com/postpop/videoreader
 ```
 
 [1]: http://opencv.org
