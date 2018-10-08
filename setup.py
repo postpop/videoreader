@@ -7,7 +7,7 @@ setup(
     author='Jan Clemens',
     py_modules=['videoreader'],
     install_requires=[
-        #'cv2>=3.0',
+        'opencv-python>=3.0',
         #'python>=3.5',
         'numpy',
     ],
