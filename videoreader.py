@@ -1,10 +1,6 @@
 """Pythonic wrapper around opencv's VideoCapture()."""
-import numpy as np
 import os
 import cv2
-import logging
-import subprocess
-
 
 
 class VideoReader:
@@ -22,19 +18,21 @@ class VideoReader:
         # or to specify start frame
         for frame in vr.frames(start_frame):
             print(frame.shape)
+        # release/close file
+        del(vr)
         # as context
         with VideoReader("video.avi") as vr:
             print(vr[0].shape)
     ARGS
         filename
     PROPERTIES
-        frame_width, frame_height, frame_channels, frame_rate, number_of_frames, fourcc
+        frame_width, frame_height, frame_channels, frame_rate, frame_shape, number_of_frames, fourcc
     METHODS
         ret, frame = vr.read(framenumber): read frame, for compatibility with opencv VideoCapture
-        vr.close(): release file
     """
 
     def __init__(self, filename):
+        """Open video in filename."""
         if not os.path.exists(filename):
             raise FileNotFoundError(f'{filename} not found.')
         self._filename = filename
@@ -43,10 +41,8 @@ class VideoReader:
         # read frame to test videoreader and get number of channels
         # need to reset w/o calling __init__ so we start with a vanilla reader that is at frame 0 (maybe seek to frame 0?)
         ret, frame = self.read()
-        (_, _, self.frame_channels) = np.uintp(frame.shape)
+        self.frame_channels = int(frame.shape[-1])
         self._seek(0)
-        self._number_of_frames = None
-        # save information about the video
         
     def __del__(self):
         try:
@@ -118,5 +114,5 @@ class VideoReader:
 
     @property
     def frame_shape(self):
-        return np.uintp((self.frame_width, self.frame_height, self.frame_channels))
+        return (self.frame_width, self.frame_height, self.frame_channels)
     
