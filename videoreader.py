@@ -2,6 +2,9 @@
 import numpy as np
 import os
 import cv2
+import logging
+import subprocess
+
 
 
 class VideoReader:
@@ -40,14 +43,11 @@ class VideoReader:
         # read frame to test videoreader and get number of channels
         # need to reset w/o calling __init__ so we start with a vanilla reader that is at frame 0 (maybe seek to frame 0?)
         ret, frame = self.read()
-
+        (_, _, self.frame_channels) = np.uintp(frame.shape)
+        self._seek(0)
+        self._number_of_frames = None
         # save information about the video
-        (self.frame_width, self.frame_height, self.frame_channels) = np.uintp(frame.shape)
-        self.frame_shape = np.uintp(frame.shape)
-        self.number_of_frames = len(self)
-        self.frame_rate = self._vr.get(cv2.CAP_PROP_FPS)
-        self.fourcc = int(self._vr.get(cv2.CAP_PROP_FOURCC))
-
+        
     def __del__(self):
         try:
             self._vr.release()
@@ -56,7 +56,7 @@ class VideoReader:
 
     def __len__(self):
         """Length is number of frames."""
-        return int(self._vr.get(cv2.CAP_PROP_FRAME_COUNT))
+        return self.number_of_frames
 
     def __getitem__(self, index):
         """Now we can get frame via self[index] and self[start:stop:step]."""
@@ -91,3 +91,32 @@ class VideoReader:
     def _seek(self, frame_number):
         """Go to frame."""
         self._vr.set(cv2.CAP_PROP_POS_FRAMES, frame_number)
+
+    @property
+    def number_of_frames(self, exact=False):
+        return int(self._vr.get(cv2.CAP_PROP_FRAME_COUNT))
+
+    @property
+    def frame_rate(self):
+        return self._vr.get(cv2.CAP_PROP_FPS)
+
+    @property
+    def frame_width(self):
+        return int(self._vr.get(cv2.CAP_PROP_FRAME_WIDTH))
+
+    @property
+    def frame_height(self):
+        return int(self._vr.get(cv2.CAP_PROP_FRAME_HEIGHT))
+
+    @property
+    def fourcc(self):
+        return int(self._vr.get(cv2.CAP_PROP_FOURCC))
+
+    @property
+    def frame_format(self):
+        return int(self._vr.get(cv2.CAP_PROP_FORMAT))
+
+    @property
+    def frame_shape(self):
+        return np.uintp((self.frame_width, self.frame_height, self.frame_channels))
+    
