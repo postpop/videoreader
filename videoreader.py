@@ -38,12 +38,14 @@ class VideoReader:
         self._filename = filename
         self._vr = cv2.VideoCapture()
         self._vr.open(self._filename)
-        # read frame to test videoreader and get number of channels
-        # need to reset w/o calling __init__ so we start with a vanilla reader that is at frame 0 (maybe seek to frame 0?)
-        ret, frame = self.read()
-        self.frame_channels = int(frame.shape[-1])
-        self._seek(0)
+        ok, frame = self.read()  # read frame to get number of channels
+        if ok:
+            self.frame_channels = int(frame.shape[-1])
+        else:
+            raise IOError(f'cannot read frame from {self._filename}.')
+        self._seek(0)  # reset to first frame
         
+                
     def __del__(self):
         try:
             self._vr.release()
