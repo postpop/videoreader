@@ -31,7 +31,7 @@ class VideoReader:
         ret, frame = vr.read(framenumber): read frame, for compatibility with opencv VideoCapture
     """
 
-    def __init__(self, filename):
+    def __init__(self, filename: str):
         """Open video in filename."""
         if not os.path.exists(filename):
             raise FileNotFoundError(f'{filename} not found.')
@@ -44,12 +44,11 @@ class VideoReader:
         else:
             raise IOError(f'cannot read frame from {self._filename}.')
         self._seek(0)  # reset to first frame
-        
-                
+
     def __del__(self):
         try:
             self._vr.release()
-        except AttributeError: # if file does not exist this will be raised since _vr does not exist
+        except AttributeError:  # if file does not exist this will be raised since _vr does not exist
             pass
 
     def __len__(self):
@@ -71,7 +70,7 @@ class VideoReader:
     def __enter__(self):
         return self
 
-    def __exit__(self, *args):
+    def __exit__(self):
         """Release video file."""
         del(self)
 
@@ -91,7 +90,7 @@ class VideoReader:
         self._vr.set(cv2.CAP_PROP_POS_FRAMES, frame_number)
 
     @property
-    def number_of_frames(self, exact=False):
+    def number_of_frames(self):
         return int(self._vr.get(cv2.CAP_PROP_FRAME_COUNT))
 
     @property
@@ -100,11 +99,11 @@ class VideoReader:
 
     @property
     def frame_width(self):
-        return int(self._vr.get(cv2.CAP_PROP_FRAME_WIDTH))
+        return int(self._vr.get(cv2.CAP_PROP_FRAME_HEIGHT))
 
     @property
     def frame_height(self):
-        return int(self._vr.get(cv2.CAP_PROP_FRAME_HEIGHT))
+        return int(self._vr.get(cv2.CAP_PROP_FRAME_WIDTH))
 
     @property
     def fourcc(self):
@@ -117,4 +116,3 @@ class VideoReader:
     @property
     def frame_shape(self):
         return (self.frame_width, self.frame_height, self.frame_channels)
-    
