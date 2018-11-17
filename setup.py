@@ -9,7 +9,6 @@ setup(
     python_requires='>=3.5',
     install_requires=[
         'opencv-python>=3.0',
-        'numpy>=1.14',
     ],
     keywords='cv2 opencv videocapture videoreader avi',
 )
