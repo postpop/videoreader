@@ -1,5 +1,6 @@
 """Pythonic wrapper around opencv's VideoCapture()."""
 import os
+from collections import Sequence
 import cv2
 
 
@@ -59,7 +60,10 @@ class VideoReader:
         """Now we can get frame via self[index] and self[start:stop:step]."""
         if isinstance(index, slice):
             return (self[ii] for ii in range(*index.indices(len(self))))
-        return self.read(index)[1]
+        elif isinstance(index, (list, tuple, range)):
+            return (self[ii] for ii in index)
+        else:
+            return self.read(index)[1]
 
     def __repr__(self):
         return f"{self._filename} with {len(self)} frames of size {self.frame_shape} at {self.frame_rate:1.2f} fps"
