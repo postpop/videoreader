@@ -4,6 +4,7 @@ Wrapper around [opencv's][1] `cv2.VideoCapture` to simplify working with video f
 ## Installation
 In a terminal window run:
 ```shell
+conda install opencv
 pip install git+http://github.com/postpop/videoreader
 ```
 
