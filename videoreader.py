@@ -80,7 +80,10 @@ class VideoReader:
 
     def read(self, frame_number=None):
         """Read next frame or frame specified by `frame_number`."""
-        if frame_number is not None:  # seek
+        current_frame_pos = self._vr.get(cv2.CAP_PROP_POS_FRAMES)
+        is_current_frame = frame_number == current_frame_pos
+        # no need to seek if we are at the right position - greatly speeds up reading sunbsequent frames
+        if frame_number is not None and not is_current_frame:
             self._seek(frame_number)
         ret, frame = self._vr.read()  # read
         return ret, frame
