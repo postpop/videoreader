@@ -14,10 +14,10 @@ class VideoReader:
         vr[0:1000:10000]  # this will be a generator
         print(f'Video has {len(vr)} frames.')
         # use as generator/iterator
-        for frame in vr:
+        for frame in vr[:]:
             print(frame.shape)
         # or to specify start frame
-        for frame in vr.frames(start_frame):
+        for frame in vr[start_frame:]:
             print(frame.shape)
         # release/close file
         del(vr)
@@ -27,7 +27,7 @@ class VideoReader:
     ARGS
         filename
     PROPERTIES
-        frame_width, frame_height, frame_channels, frame_rate, frame_shape, number_of_frames, fourcc
+        frame_width, frame_height, frame_channels, frame_rate, frame_shape, number_of_frames, fourcc, current_frame_pos
     METHODS
         ret, frame = vr.read(framenumber): read frame, for compatibility with opencv VideoCapture
     """
