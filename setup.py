@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
     name='videoreader',
-    version='0.2',
+    version='0.3',
     author='Jan Clemens',
     py_modules=['videoreader'],
     python_requires='>=3.5',
