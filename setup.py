@@ -8,7 +8,7 @@ setup(
     py_modules=['videoreader'],
     python_requires='>=3.5',
     install_requires=[
-        'opencv>=3.0',
+        'py-opencv>=3.0',
     ],
     keywords='cv2 opencv videocapture videoreader avi',
 )
