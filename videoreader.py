@@ -1,6 +1,5 @@
 """Pythonic wrapper around opencv's VideoCapture()."""
 import os
-from collections import Sequence
 import cv2
 
 
