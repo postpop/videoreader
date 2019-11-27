@@ -1,11 +1,11 @@
-# videoreader - a pythonic way to read videos
-Wrapper around [opencv's][1] `cv2.VideoCapture` to simplify working with video files.
+# Pythonic video reader
+Wrapper around [opencv's][1] `cv2.VideoCapture` to simplify reading video files in python.
 
 ## Installation
 In a terminal window run:
 ```shell
 conda install opencv
-pip install git+http://github.com/postpop/videoreader
+pip install pyvideoreader
 ```
 
 ## Usage
@@ -18,7 +18,7 @@ frame = vr[100]
 vr.close()
 ```
 
-Or use a `with` statement which takes care of opening and closing the video:
+Or use a [context manger][2] which takes care of opening and closing the video:
 ```python
 with VideoReader(video_file_name) as vr:  # load the video
     frame = vr[100]
