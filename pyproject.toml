@@ -1,0 +1,11 @@
+[build-system]
+requires = ["flit"]
+build-backend = "flit.buildapi"
+
+[tool.flit.metadata]
+module = "videoreader"
+author = "Jan Clemens"
+author-email = "clemensjan@googlemail.com"
+home-page = "https://github.com/postpop/videoreader"
+classifiers = ["License :: OSI Approved :: MIT License"]
+
