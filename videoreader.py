@@ -1,5 +1,5 @@
 """Pythonic wrapper around opencv's VideoCapture()."""
-__version__ = '0.4.2'
+__version__ = '0.4.3'
 
 import os
 import cv2

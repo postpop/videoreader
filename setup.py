@@ -22,7 +22,7 @@ def find_version(*file_paths):
 
 setup(
     name='videoreader',
-    version=find_version("package", "__init__.py"),
+    version=find_version("videoreader.py"),
     author='Jan Clemens',
     py_modules=['videoreader'],
     python_requires='>=3.5',
