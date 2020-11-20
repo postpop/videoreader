@@ -10,5 +10,5 @@ author-email = "clemensjan@googlemail.com"
 home-page = "https://github.com/postpop/videoreader"
 classifiers = ["License :: OSI Approved :: MIT License"]
 requires-python = ">=3.5"
-requires = ['opencv-python>=3.0']
+requires = ['opencv-python-headless>=3.0']
 description-file = "README.md"
