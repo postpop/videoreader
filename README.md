@@ -4,14 +4,17 @@ Wrapper around [opencv's][1] `cv2.VideoCapture` to simplify reading video files 
 ## Installation
 In a terminal window run:
 ```shell
-conda install opencv
+conda install pyvideoreader -c ncb
+```
+or
+```shell
 pip install pyvideoreader
 ```
 
 ## Usage
 Open a video file and read frame 100:
 ```python
-from videoreader import VideoReader  
+from videoreader import VideoReader
 vr = VideoReader(video_file_name)
 print(vr)  # prints video_file_name, number of frames, frame rate and frame size
 frame = vr[100]
