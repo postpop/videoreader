@@ -40,7 +40,8 @@ jobs:
         shell: bash -l {0}
         run: |
           conda install pytest
-      - name: Install pytest
+
+      - name: Run tests
         shell: bash -l {0}
         run: |
           pip install .
@@ -81,7 +82,7 @@ jobs:
 
   publish_to_anaconda:
     name: Publish to Anaconda.org
-    needs: [tests]
+    needs: [tests, publish_to_pypi]
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
