@@ -15,43 +15,43 @@ on:
 
 jobs:
 
-  tests:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        # python-version: [3.6, 3.7, 3.8, 3.9]
-        # os: [ubuntu-latest, windows-latest, macOS-latest]
-        python-version: [3.8]
-        os: [ubuntu-latest]
+#   tests:
+#     runs-on: ${{ matrix.os }}
+#     strategy:
+#       matrix:
+#         # python-version: [3.6, 3.7, 3.8, 3.9]
+#         # os: [ubuntu-latest, windows-latest, macOS-latest]
+#         python-version: [3.8]
+#         os: [ubuntu-latest]
 
-    steps:
-      - name: Checkout source
-        uses: actions/checkout@v2
+#     steps:
+#       - name: Checkout source
+#         uses: actions/checkout@v2
 
-      - name: Setup Mamba
-        uses: conda-incubator/setup-miniconda@v2
-        # https://github.com/conda-incubator/setup-miniconda
-        with:
-          python-version: ${{ matrix.python-version }}
-          mamba-version: "*"
-          channels: conda-forge,ncb
-          use-only-tar-bz2: true # IMPORTANT: This needs to be set for caching to work properly!
-          use-mamba: true
+#       - name: Setup Mamba
+#         uses: conda-incubator/setup-miniconda@v2
+#         # https://github.com/conda-incubator/setup-miniconda
+#         with:
+#           python-version: ${{ matrix.python-version }}
+#           mamba-version: "*"
+#           channels: conda-forge,ncb
+#           use-only-tar-bz2: true # IMPORTANT: This needs to be set for caching to work properly!
+#           use-mamba: true
 
-      - name: Install pytest
-        shell: bash -l {0}
-        run: |
-          conda install pytest
-      - name: Install pytest
-        shell: bash -l {0}
-        run: |
-          pip install .
-          pytest
+#       - name: Install pytest
+#         shell: bash -l {0}
+#         run: |
+#           conda install pytest
+#       - name: Install pytest
+#         shell: bash -l {0}
+#         run: |
+#           pip install .
+#           pytest
 
 
   publish_to_pypi:
     name: Publish to PyPi
-    needs: [tests]
+    #needs: [tests]
     runs-on: ubuntu-latest
     steps:
       - name: Install flit
@@ -70,7 +70,7 @@ jobs:
 
   publish_to_anaconda:
     name: Publish to Anaconda.org
-    needs: [tests]
+    #needs: [tests]
     runs-on: ubuntu-latest
     steps:
       - name: Install build dependencies
@@ -83,9 +83,9 @@ jobs:
       - name: Build conda package and upload to anaconda.org
         shell: bash -l {0}
         run: |
-          conda mambabuild pyvideoreader -c conda-forge -c ncb --python 3.9 --user ncb -t $ANACONDA_TOKEN
-          conda mambabuild pyvideoreader -c conda-forge -c ncb --python 3.8 --user ncb -t $ANACONDA_TOKEN
-          conda mambabuild pyvideoreader -c conda-forge -c ncb --python 3.7 --user ncb -t $ANACONDA_TOKEN
-          conda mambabuild pyvideoreader -c conda-forge -c ncb --python 3.6 --user ncb -t $ANACONDA_TOKEN
+          conda mambabuild conda/pyvideoreader -c conda-forge -c ncb --python 3.9 --user ncb -t $ANACONDA_TOKEN
+          #conda mambabuild pyvideoreader -c conda-forge -c ncb --python 3.8 --user ncb -t $ANACONDA_TOKEN
+          #conda mambabuild pyvideoreader -c conda-forge -c ncb --python 3.7 --user ncb -t $ANACONDA_TOKEN
+          #conda mambabuild pyvideoreader -c conda-forge -c ncb --python 3.6 --user ncb -t $ANACONDA_TOKEN
         env:
           ANACONDA_TOKEN: ${{ secrets.ANACONDA_TOKEN }}
