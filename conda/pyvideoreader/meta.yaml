@@ -1,0 +1,41 @@
+{% set data = load_setup_py_data(setup_file='../../setup.py', from_recipe_dir=True) %}
+{% set name = "pyvideoreader" %}
+{% set version = "0.5.0" %}
+# {% set version = data.get('version') %}
+
+package:
+  name: pyvideoreader
+  version: "{{ version }}"
+
+source:
+  url: "https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz"
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - python
+    - pip
+    - opencv-python-headless
+  run:
+    - python
+    - pip
+    - opencv-python-headless
+
+test:
+  imports:
+    - videoreader
+
+about:
+  home: "https://github.com/postpop/videoreader"
+  license: MIT
+  license_family: MIT
+  license_file: LICENSE
+  summary: "Pythonic interface for opencv's cv2.VideoCapture"
+  doc_url: "https://github.com/postpop/videoreader"
+  dev_url: "https://github.com/postpop/videoreader"
+
+extra:
+  recipe-maintainers:
+    - postpop
