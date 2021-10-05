@@ -62,7 +62,7 @@ jobs:
       - name: Build and publish
         shell: bash -l {0}
         run: |
-          flit publish
+          python -m flit publish
         env:
           FLIT_USERNAME: ${{ secrets.FLIT_USERNAME }}
           FLIT_PASSWORD: ${{ secrets.FLIT_PASSWORD }}
