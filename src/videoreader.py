@@ -1,5 +1,5 @@
 """Pythonic wrapper around opencv's VideoCapture()."""
-__version__ = '0.5.0'
+__version__ = '0.5.1'
 
 import os
 import cv2
@@ -99,7 +99,7 @@ class VideoReader:
     @property
     def current_frame_pos(self):
         return self._vr.get(cv2.CAP_PROP_POS_FRAMES)
-    
+
     @property
     def number_of_frames(self):
         return int(self._vr.get(cv2.CAP_PROP_FRAME_COUNT))
