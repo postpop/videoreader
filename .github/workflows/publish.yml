@@ -1,4 +1,4 @@
-name: Publish to PyPI using flit
+name: Publish to PyPI and Anaconda.org
 
 on:
   release:
@@ -40,6 +40,7 @@ jobs:
 
       - name: Run pytest
         run: |
+          conda install pytest
           pip install .
           pytest
 
