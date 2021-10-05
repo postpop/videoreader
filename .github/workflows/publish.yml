@@ -82,7 +82,6 @@ jobs:
   publish_to_anaconda:
     name: Publish to Anaconda.org
     needs: [tests]
-    runs-on: ubuntu-latest
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
