@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 import os
 import codecs
 import re
@@ -22,12 +22,12 @@ def find_version(*file_paths):
 
 setup(
     name='videoreader',
-    version=find_version("videoreader.py"),
+    version=find_version("src/videoreader.py"),
     author='Jan Clemens',
-    py_modules=['videoreader'],
     python_requires='>=3.5',
-    install_requires=[
-        'opencv-python-headless>=3.0',
-    ],
+    packages=find_packages('src'),
+    package_dir={'': 'src'},
+
+    install_requires=['setuptools', 'opencv-python-headless>=3.0',],
     keywords='cv2 opencv videocapture videoreader avi',
 )
