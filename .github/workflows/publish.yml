@@ -48,9 +48,6 @@ jobs:
     needs: [tests]
     runs-on: ubuntu-latest
     steps:
-    # - name: Checkout source
-    #   uses: actions/checkout@v2
-
     - name: Install flit
       run: |
         conda install flit~=3.0
@@ -66,15 +63,11 @@ jobs:
   publish_to_anaconda:
     name: Publish to Anaconda.org
     needs: [tests]
-
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout source
-        uses: actions/checkout@v2
-
       - name: Install build dependencies
         run: |
-          micromamba install -y -n base -c conda-forge python=3.8 boa anaconda-client conda-build conda-verify \
-          micromamba clean --all --yes
+          conda install -y -n base -c conda-forge python=3.8 boa anaconda-client conda-build conda-verify \
           conda config --set anaconda_upload yes
           conda config --set always_yes yes --set changeps1 no
 
