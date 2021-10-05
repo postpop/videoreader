@@ -1,6 +1,6 @@
 [build-system]
-requires = ["flit"]
-build-backend = "flit.buildapi"
+requires = ["flit_core >=2,<4"]
+build-backend = "flit_core.buildapi"
 
 [tool.flit.metadata]
 dist-name = "pyvideoreader"
@@ -12,3 +12,8 @@ classifiers = ["License :: OSI Approved :: MIT License"]
 requires-python = ">=3.5"
 requires = ['opencv-python-headless>=3.0']
 description-file = "README.md"
+
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+testpaths = ["tests",]
