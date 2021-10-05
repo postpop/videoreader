@@ -83,9 +83,6 @@ jobs:
       - name: Build conda package and upload to anaconda.org
         shell: bash -l {0}
         run: |
-          conda mambabuild conda/pyvideoreader -c conda-forge -c ncb --python 3.9 --user ncb -t $ANACONDA_TOKEN
-          #conda mambabuild pyvideoreader -c conda-forge -c ncb --python 3.8 --user ncb -t $ANACONDA_TOKEN
-          #conda mambabuild pyvideoreader -c conda-forge -c ncb --python 3.7 --user ncb -t $ANACONDA_TOKEN
-          #conda mambabuild pyvideoreader -c conda-forge -c ncb --python 3.6 --user ncb -t $ANACONDA_TOKEN
+          conda mambabuild conda/pyvideoreader -c conda-forge -c ncb --python 3.9 --user ncb --token $ANACONDA_TOKEN
         env:
           ANACONDA_TOKEN: ${{ secrets.ANACONDA_TOKEN }}
