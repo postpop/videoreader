@@ -1,0 +1,88 @@
+name: Publish to PyPI using flit
+
+on:
+  release:
+    types:
+      - published
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Log level'
+        required: true
+        default: 'warning'
+      tags:
+        description: 'manual run'
+
+jobs:
+
+  tests:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        # python-version: [3.6, 3.7, 3.8, 3.9]
+        # os: [ubuntu-latest, windows-latest, macOS-latest]
+        python-version: [3.8]
+        os: [ubuntu-latest]
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v2
+
+      - name: Setup Mamba
+        # https://github.com/conda-incubator/setup-miniconda
+        with:
+          python-version: ${{ matrix.python-version }}
+          mamba-version: "*"
+          channels: conda-forge,ncb
+          use-only-tar-bz2: true # IMPORTANT: This needs to be set for caching to work properly!
+          use-mamba: true
+
+      - name: Run pytest
+        run: |
+          pip install .
+          pytest
+
+
+  publish_to_pypi:
+    name: Publish to PyPi
+    needs: [tests]
+    runs-on: ubuntu-latest
+    steps:
+    # - name: Checkout source
+    #   uses: actions/checkout@v2
+
+    - name: Install flit
+      run: |
+        conda install flit~=3.0
+
+    - name: Build and publish
+      run: |
+        flit publish
+      env:
+        FLIT_USERNAME: ${{ secrets.FLIT_USERNAME }}
+        FLIT_PASSWORD: ${{ secrets.FLIT_PASSWORD }}
+
+
+  publish_to_anaconda:
+    name: Publish to Anaconda.org
+    needs: [tests]
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v2
+
+      - name: Install build dependencies
+        run: |
+          micromamba install -y -n base -c conda-forge python=3.8 boa anaconda-client conda-build conda-verify \
+          micromamba clean --all --yes
+          conda config --set anaconda_upload yes
+          conda config --set always_yes yes --set changeps1 no
+
+      - name: Build conda package and upload to anaconda.org
+        run: |
+          conda mambabuild pyvideoreader -c conda-forge -c ncb --python 3.9 --user ncb -t $ANACONDA_TOKEN
+          conda mambabuild pyvideoreader -c conda-forge -c ncb --python 3.8 --user ncb -t $ANACONDA_TOKEN
+          conda mambabuild pyvideoreader -c conda-forge -c ncb --python 3.7 --user ncb -t $ANACONDA_TOKEN
+          conda mambabuild pyvideoreader -c conda-forge -c ncb --python 3.6 --user ncb -t $ANACONDA_TOKEN
+        env:
+          ANACONDA_TOKEN: ${{ secrets.ANACONDA_TOKEN }}
