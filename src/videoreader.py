@@ -70,7 +70,7 @@ class VideoReader:
         return f"{self._filename} with {len(self)} frames of size {self.frame_shape} at {self.frame_rate:1.2f} fps"
 
     def __iter__(self):
-        return self.frames(start=0, stop=None, step=1)
+        return self[:]
 
     def __enter__(self):
         return self
