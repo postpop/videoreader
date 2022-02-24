@@ -85,6 +85,7 @@ jobs:
     needs: [tests]#, publish_to_pypi]
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: False
       matrix:
         python-version: [3.6, 3.7, 3.8, 3.9, '3.10']
         os: [ubuntu-latest, windows-latest, macOS-latest]
