@@ -1,18 +1,26 @@
 [build-system]
-requires = ["flit_core >=2,<4"]
+requires = ["flit_core >=3.4,<4"]
 build-backend = "flit_core.buildapi"
 
-[tool.flit.metadata]
-dist-name = "pyvideoreader"
-module = "videoreader"
-author = "Jan Clemens"
-author-email = "clemensjan@googlemail.com"
-home-page = "https://github.com/postpop/videoreader"
+[project]
+name = "pyvideoreader"
+authors = [
+    {name = "Jan Clemens", email = "clemensjan@googlemail.com"}
+]
 classifiers = ["License :: OSI Approved :: MIT License"]
 requires-python = ">=3.5"
-requires = ['opencv-python-headless>=3.0']
-description-file = "README.md"
+dependencies = ['opencv-python-headless>=3.0']
+readme = "README.md"
+description = "Wrapper around opencv's cv2.VideoCapture to simplify reading video files in python."
+dynamic = ["version"]
+license = {file = "LICENSE"}
 
+[project.urls]
+Documentation = "https://github.com/postpop/videoreader"
+Source = "https://github.com/postpop/videoreader"
+
+[tool.flit.module]
+name = "videoreader"
 
 [tool.pytest.ini_options]
 minversion = "6.0"
