@@ -45,7 +45,7 @@ jobs:
         shell: bash -l {0}
         run: |
           pip install .
-          pytest
+          python3 -m pytest
 
 
 #   publish_to_pypi:
