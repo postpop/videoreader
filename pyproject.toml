@@ -8,7 +8,7 @@ authors = [
     {name = "Jan Clemens", email = "clemensjan@googlemail.com"}
 ]
 classifiers = ["License :: OSI Approved :: MIT License"]
-requires-python = ">=3.5"
+requires-python = ">=3.7"
 # dependencies = ["opencv-python-headless>=3.0"]
 dependencies = [
     'opencv-python-headless>=3.0; python_version < "3.10"',
