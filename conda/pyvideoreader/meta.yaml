@@ -1,8 +1,9 @@
-{% set name = "pyvideoreader" %}
-{% set version = "0.5.5" %}
+{% set data = load_setup_py_data(setup_file='../../setup.py', from_recipe_dir=True) %}
+{% set name = data.get('name') %}
+{% set version = data.get('version') %}
 
 package:
-  name: pyvideoreader
+  name: "{{ name }}"
   version: "{{ version }}"
 
 source:
@@ -12,16 +13,14 @@ build:
   number: 0
 
 requirements:
-  build:
-    - python
-    - numpy>1.20
+  host:
+    - python {{ python }}
     - pip
-    - opencv-python-headless
   run:
-    - python
+    - python {{ python }}
     - numpy>1.20
-    - pip
-    - opencv-python-headless
+    - opencv-python-headless  # [not arm64]
+    - py-opencv  # [arm64]
 
 test:
   imports:
