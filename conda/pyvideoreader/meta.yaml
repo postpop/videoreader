@@ -1,6 +1,5 @@
-{% set data = load_setup_py_data(setup_file='../../setup.py', from_recipe_dir=True) %}
 {% set name = "pyvideoreader" %}
-{% set version = data.get('version') %}
+{% set version = "0.5.5" %}
 
 package:
   name: pyvideoreader
