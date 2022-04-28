@@ -4,4 +4,4 @@ export PIP_NO_INDEX=False
 export PIP_NO_DEPENDENCIES=False
 export PIP_IGNORE_INSTALLED=False
 
-$PYTHON -m pip install pyvideoreader -vv
+$PYTHON -m pip install pyvideoreader -vv --no-deps
