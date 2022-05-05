@@ -88,6 +88,9 @@ class VideoReader:
         ret, frame = self._vr.read()  # read
         return ret, frame
 
+    def close(self):
+        self._vr.release()
+
     def _reset(self):
         """Re-initialize object."""
         self.__init__(self._filename)
