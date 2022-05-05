@@ -112,11 +112,11 @@ class VideoReader:
         return self._vr.get(cv2.CAP_PROP_FPS)
 
     @property
-    def frame_width(self):
+    def frame_height(self):
         return int(self._vr.get(cv2.CAP_PROP_FRAME_HEIGHT))
 
     @property
-    def frame_height(self):
+    def frame_width(self):
         return int(self._vr.get(cv2.CAP_PROP_FRAME_WIDTH))
 
     @property
@@ -129,4 +129,4 @@ class VideoReader:
 
     @property
     def frame_shape(self):
-        return (self.frame_width, self.frame_height, self.frame_channels)
+        return (self.frame_height, self.frame_width, self.frame_channels)

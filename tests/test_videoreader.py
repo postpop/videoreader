@@ -27,8 +27,8 @@ def test_frame_attrs(tmp_path):
     video_path = make_test_video(tmp_path)
     vr = VideoReader(video_path)
 
-    assert vr.frame_width == 480
-    assert vr.frame_height == 640
+    assert vr.frame_height == 480
+    assert vr.frame_width == 640
     assert vr.frame_rate == 25.0
     assert vr.fourcc == cv2.VideoWriter_fourcc(*'MJPG')
     assert vr.frame_format == 0
