@@ -19,10 +19,11 @@ requirements:
   run:
     - python {{ python }}
     - numpy
-    - opencv-python-headless  # [not arm64]
-    - py-opencv  # [not arm64 and py>=311]
-    - py-opencv  # [arm64]
-
+    # - opencv-python-headless  # [not arm64]
+    # - py-opencv  # [not arm64 and py>=311]
+    # - py-opencv  # [arm64]
+    - py-opencv
+    
 test:
   imports:
     - videoreader
