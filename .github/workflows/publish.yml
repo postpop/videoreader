@@ -45,6 +45,7 @@ jobs:
     - name: Update pip in python 312
       if: ${{ matrix.python-version == 3.12}}
       run: |
+       conda list
        python -m ensurepip --upgrade
     - name: Build and upload to anaconda
       run: |
