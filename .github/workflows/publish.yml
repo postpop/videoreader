@@ -21,9 +21,8 @@ jobs:
       fail-fast: false
       matrix:
         # python-version: [3.9, '3.10', '3.11', '3.12']
-        # python-version: [3.9, '3.10', '3.11']
         python-version: ['3.12']
-        os: [macOS-14]
+        os: [ubuntu-latest, windows-latest, macOS-13, macOS-14]
     defaults:  # https://github.com/marketplace/actions/setup-miniconda#use-a-default-shell
       run:
         shell: bash -l {0}
@@ -39,16 +38,6 @@ jobs:
         activate-environment: anaconda-client-env
         environment-file: build_env.yml
         condarc-file: condarc.yml
-        # use-only-tar-bz2: true  # IMPORTANT: This needs to be set for caching to work properly!
-    # - name: Update pip in python 312
-    #   if: ${{ matrix.python-version == 3.12}}
-    #   run: |
-    #    conda install "setuptools>0.66" "pip>23" -y -c conda-forge
-    #    conda install "setuptools>0.66" "pip>23" -n base -y -c conda-forge
-    # - name: Update pip in python 312
-    #   if: ${{ matrix.python-version == 3.12}}
-    #   run: |
-    #    conda list
     - name: Build and upload to anaconda
       run: |
         conda mambabuild conda/pyvideoreader -c conda-forge --python ${{ matrix.python-version }} --user ncb --token $ANACONDA_TOKEN
