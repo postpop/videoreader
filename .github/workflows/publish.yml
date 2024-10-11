@@ -32,21 +32,20 @@ jobs:
       uses: conda-incubator/setup-miniconda@v3
       with:
         auto-update-conda: true
-        # miniforge-variant: Mambaforge
         channels: conda-forge,ncb,anaconda,defaults
         python-version: 3.11
-        # mamba-version: "*"
         auto-activate-base: false
         activate-environment: anaconda-client-env
         environment-file: build_env.yml
         condarc-file: condarc.yml
-        # use-mamba: true
         use-only-tar-bz2: true  # IMPORTANT: This needs to be set for caching to work properly!
     - name: Update pip in python 312
       if: ${{ matrix.python-version == 3.12}}
       run: |
-       conda install setuptools>=0.66 -y -c conda-forge
-       pip install setuptools>=0.66
+       conda install "setuptools>0.66" -y -c conda-forge
+    - name: Update pip in python 312
+      if: ${{ matrix.python-version == 3.12}}
+      run: |
        conda list
     - name: Build and upload to anaconda
       run: |
