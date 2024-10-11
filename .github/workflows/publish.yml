@@ -42,7 +42,8 @@ jobs:
     - name: Update pip in python 312
       if: ${{ matrix.python-version == 3.12}}
       run: |
-       conda install "setuptools>0.66" -y -c conda-forge
+       conda install "setuptools>0.66" "pip>23" -y -c conda-forge
+       conda install "setuptools>0.66" "pip>23" -n base -y -c conda-forge
     - name: Update pip in python 312
       if: ${{ matrix.python-version == 3.12}}
       run: |
