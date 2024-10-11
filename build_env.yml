@@ -9,4 +9,5 @@ dependencies:
   - conda-build
   - conda-verify
   - pip
+  - setuptools>0.66
   - git
