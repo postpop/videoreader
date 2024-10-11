@@ -33,7 +33,7 @@ jobs:
       with:
         auto-update-conda: true
         channels: conda-forge,ncb,anaconda,defaults
-        python-version: 3.11
+        python-version: 3.12
         auto-activate-base: false
         activate-environment: anaconda-client-env
         environment-file: build_env.yml
