@@ -45,7 +45,7 @@ jobs:
     - name: Update pip in python 312
       if: ${{ matrix.python-version == 3.12}}
       run: |
-       conda update setuptools -y -c conda-forge
+       conda install setuptools>=0.66 -y -c conda-forge
     - name: Build and upload to anaconda
       run: |
         conda mambabuild conda/pyvideoreader -c conda-forge --python ${{ matrix.python-version }} --user ncb --token $ANACONDA_TOKEN
