@@ -46,6 +46,8 @@ jobs:
       if: ${{ matrix.python-version == 3.12}}
       run: |
        conda install setuptools>=0.66 -y -c conda-forge
+       pip install setuptools>=0.66
+       conda list
     - name: Build and upload to anaconda
       run: |
         conda mambabuild conda/pyvideoreader -c conda-forge --python ${{ matrix.python-version }} --user ncb --token $ANACONDA_TOKEN
