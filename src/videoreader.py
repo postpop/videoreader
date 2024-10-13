@@ -1,5 +1,6 @@
 """Pythonic wrapper around opencv's VideoCapture()."""
-__version__ = '0.5.6'
+
+__version__ = "0.5.7"
 
 import os
 import cv2
@@ -36,7 +37,7 @@ class VideoReader:
     def __init__(self, filename: str):
         """Open video in filename."""
         if not os.path.exists(filename):
-            raise FileNotFoundError(f'{filename} not found.')
+            raise FileNotFoundError(f"{filename} not found.")
         self._filename = filename
         self._vr = cv2.VideoCapture()
         self._vr.open(self._filename)
@@ -44,7 +45,7 @@ class VideoReader:
         if ok:
             self.frame_channels = int(frame.shape[-1])
         else:
-            raise IOError(f'cannot read frame from {self._filename}.')
+            raise IOError(f"cannot read frame from {self._filename}.")
         self._seek(0)  # reset to first frame
 
     def __del__(self):
@@ -77,7 +78,7 @@ class VideoReader:
 
     def __exit__(self):
         """Release video file."""
-        del(self)
+        del self
 
     def read(self, frame_number=None):
         """Read next frame or frame specified by `frame_number`."""
